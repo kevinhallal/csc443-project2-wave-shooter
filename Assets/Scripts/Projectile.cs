@@ -34,9 +34,14 @@ public class Projectile : MonoBehaviour, IPoolable
     {
         if (!alive) return;
 
-        var health = other.GetComponentInParent<EnemyHealth>();
-        if (health != null)
-            health.TakeDamage(damage);
+        PlayerHealth playerHealth = other.GetComponentInParent<PlayerHealth>();
+
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(damage);
+            Return();
+            return;
+        }
 
         Return();
     }
